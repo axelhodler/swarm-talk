@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Swarm - Axel Hodler</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .black-background { background-color: black; color: white;}
+      .image-60 img {
+          width: 60%;
+      }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle
+
+# Swarm
+
+### Serverless Hosting Incentivised Peer-to-peer Storage and Content Distribution
+
+---
+
+class: center, middle
+
+# Recordkeeping on the blockchain
+
+???
+
+war schon mehrfach im meetup ein thema
+
+---
+
+class: center, middle
+
+.image-60[![Geburtsurkunde](images/geburtsurkunde.png)]
+
+---
+
+# Storing data on the Ethereum Blockchain
+
+```python
+>>> byte_storage_cost = 200
+>>> byte_in_transaction_cost = 68
+>>> transaction_cost = 21000
+>>> one_cent_in_gas = 50000
+>>> (268 * 100000 + 21000) / 50000
+5360.42
+```
+
+--
+
+=> 1 Megabyte is ~50€
+
+---
+
+# Storing data II
+
+* Even if you are willing to pay the price, gaslimit is currently at ~4Mio.
+(1MB tx consumes ~268Mio gas)
+
+--
+
+### Thus data will be stored off-chain
+
+---
+
+# Issues
+
+* Avoid data loss by having multiple nodes store it
+
+--
+
+* What is the incentive of the node to store private documents of strangers?
+
+???
+Private tracker
+
+---
+
+# Alternatives
+
+* Filecoin: Positive incentivisation only
+
+--
+
+* IPFS: incentivisiation not built-in
+
+--
+
+* Zeronet: Not fast/responsive enough (???)
+
+???
+
+In Filecoin you don't lose anything if you lose the data. Only future earnings.
+
+---
+
+# Kademlia
+
+![Kad0](images/kad0.svg)
+
+---
+
+# Kademlia II
+
+![Kad1](images/kad1.svg)
+
+---
+
+# Kademlia III
+
+![Kad2](images/kad2.svg)
+
+---
+
+# ENS (Ethereum Name Service)
+
+* Provide human readable name for resource.
+
+--
+
+* Contracts can contact name instead of address. Thus the underlying contract can be replaced with an updated version.
+
+--
+
+* Allow changing the content without changing the URL
+
+---
+
+# Example
+
+```javascript
+{
+  [...]
+  "stuttgart.eth": {
+    "content": "0xdb3083055c72ea2528902aae0ff8...",
+    "owner": "0xa8c193055c72ea2528902aae0fe9..."
+  },
+  "meetup.eth": {
+    "content": "0x6eaf6c1191b090631668ad8db7dd...",
+    "owner": "0x864c51dd13443614d0ff6949a3ba..."
+  },
+  [...]
+}
+```
+---
+
+# ENS II
+
+* Not yet available
+
+--
+
+* How to distribute domains?
+
+
+---
+
+class: center, middle
+
+# Demo
+
+---
+
+# SWAP (Swarm Accounting Protocol)
+
+* Nodes are rewarded for successfully serving data
+
+--
+
+* Micropayment per piece of data
+
+--
+
+* Balances out in the best case because your node is serving data too
+
+--
+
+* Requires Payment-Channel Network [Raiden Network](http://raiden.network/) which is not ready
+
+---
+
+> Unpopular chunks that do not generate sufficient profit from retrievals should compensate the nodes that store them for their opportunities forgone.
+
+---
+
+# SWEAR (Secure Ways of Ensuring ARchival)
+
+* Owner of data may purchase storage promises from other nodes as form of insurance
+* Storer sends deposit to SWEAR contract, serving as collateral in case data is not kept
+
+---
+
+# SWINDLE (Secured With INsurance Deposit Litigation and Escrow)
+
+Proving to any third-party that you store a blob of data without transferring the whole data and without revealing the actual contents. (Proof-of-custody)
+
+---
+
+# Image sources
+
+* [Geburtsurkunde](https://de.wikipedia.org/wiki/Geburtsurkunde#/media/File:Irmgard_Haus_Geburtsurkunde_Original.jpg)
+
+    </textarea>
+    <script src="vendor/remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create({
+        slideNumberFormat: ''
+      });
+    </script>
+  </body>
+</html>
